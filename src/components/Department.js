@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, Button, ButtonToolbar } from "react-bootstrap";
 import AddDepartMentModal from "./AddDepartMentModal";
+import ApiService from "../service/ApiService";
 
 class Department extends React.Component {
   constructor(props) {
@@ -20,19 +21,29 @@ class Department extends React.Component {
   //     addModalShow: false,
   //   });
   // }
+
+  // compoenentDidUpdate method is used to get the updates , recently added dept details
+  // componentDidUpdate() {
+  //   this.getDepartMentDetails();
+  // }
   getDepartMentDetails = () => {
-    this.setState({
-      deptDetails: [
-        {
-          id: 4,
-          name: "IT",
-        },
-        {
-          id: 5,
-          name: "Support",
-        },
-      ],
-    });
+    ApiService.getAllDepartments().then((response) =>
+      this.setState({
+        deptDetails: response.data,
+      })
+    );
+    // this.setState({
+    //   deptDetails: [
+    //     {
+    //       id: 4,
+    //       name: "IT",
+    //     },
+    //     {
+    //       id: 5,
+    //       name: "Support",
+    //     },
+    //   ],
+    // });
   };
   render() {
     let addModalClose = () =>
@@ -55,9 +66,9 @@ class Department extends React.Component {
             </thead>
             <tbody>
               {this.state.deptDetails.map((details) => (
-                <tr key={details.id}>
-                  <td>{details.id}</td>
-                  <td>{details.name}</td>
+                <tr key={details.deptId}>
+                  <td>{details.deptId}</td>
+                  <td>{details.deptName}</td>
                 </tr>
               ))}
             </tbody>

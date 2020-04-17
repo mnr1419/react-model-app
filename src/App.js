@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import Button from "react-bootstrap/Button";
 //import Modal from "react-modal";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
